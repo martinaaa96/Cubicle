@@ -1,17 +1,18 @@
 const mongoose = require('mongoose');
 const accessorySchema = new mongoose.Schema({
-   
+
     name: {
         type: String,
         required: true,
 
     },
-    imageUrl:{
+    imageUrl: {
         type: String,
         required: true,
-        
+        match: [/^https?:\/\//,'Ivalid URL']
+
     },
-    description:{
+    description: {
         type: String,
         required: true,
         maxLenght: 50
@@ -19,6 +20,6 @@ const accessorySchema = new mongoose.Schema({
 
 });
 
-const Accessory = mongoose.model('Accessory',accessorySchema);
+const Accessory = mongoose.model('Accessory', accessorySchema);
 
 module.exports = Accessory;
