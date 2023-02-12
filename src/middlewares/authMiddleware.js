@@ -6,21 +6,23 @@ exports.authentication = async (req, res, next) => {
     const token = req.cookies['auth'];
 
     if (token) {
-try{
-    const decodedToken = await jwt.verify(token,config.SECRET)
-    req.user = decodedToken;
-    req.isAuthenticated = true;
+        try {
+            const decodedToken = await jwt.verify(token, config.SECRET)
+            req.user = decodedToken;
+            req.isAuthenticated = true;
+            res.locals.username = decodedToken.username;
+            res.locals.isAuthenticated = true;
 
-    
-}catch(err){
 
-    console.log(err.message);
+        } catch (err) {
 
-res.clearCookie('auth');
+            console.log(err.message);
 
-    res.redirect('/404')
-}
-        
+            res.clearCookie('auth');
+
+            res.redirect('/404')
+        }
+
 
 
     }
@@ -28,10 +30,11 @@ res.clearCookie('auth');
     next();
 
 }
-exports.isAuthenticated = (req,res, next)=>{
-    if(!this.isAuthenticated){
+exports.isAuthenticated = (req, res, next) => {
+    if (!this.isAuthenticated) {
         return res.redirect('/login')
     }
     next();
 
 }
+
