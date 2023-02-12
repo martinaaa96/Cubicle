@@ -1,4 +1,4 @@
-exports.generateDifficutyLevels = function (currentLevel){
+exports.generateDifficultyLevels = function (currentLevel){
     const difficultyLevels = [
 
         { key: 1, label: 'Very Easy', selected: false},
@@ -17,6 +17,6 @@ exports.generateDifficutyLevels = function (currentLevel){
 
 exports.isOwner = function (user,cube){
 
-    return cube.owner == user._Id
+    return cube.owner == user._id
 
 }
