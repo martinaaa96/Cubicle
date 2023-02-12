@@ -1,11 +1,11 @@
-const utils = require('util');
+const util = require('util')
 
 const jwtCallback = require('jsonwebtoken');
 
 
 const jwt = {
-    sign: utils.promisify(jwtCallback.sign),
-    verify: utils.promisify(jwtCallback.verify)
+    sign: util.promisify(jwtCallback.sign),
+    verify: util.promisify(jwtCallback.verify)
 };
 
 module.exports = jwt;

@@ -12,12 +12,13 @@ router.post('/login', async (req, res) => {
 
     try {
         const token = await authService.login(username, password)
-console.log(token);
+        res.cookie('auth',token, {httpOnly: true});
+    
 
     } catch (err) {
-        console.log(err)
-        
-        return res.redirect('/')
+       
+console.log(err)
+      
     }
 
     return res.redirect('/')
@@ -42,7 +43,7 @@ router.post('/register', async (req, res) => {
         return res.redirect('/404')
     }
     const user = await authService.register(username, password);
-    console.log(user)
+    
 
     res.redirect('/login');
 
