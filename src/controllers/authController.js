@@ -10,15 +10,14 @@ router.post('/login', async (req, res) => {
 
     const { username, password } = req.body;
     try {
-        const user = await authService.login(username, password)
-
-        res.redirect('/');
+        const token = await authService.login(username, password)
+console.log(token)
     } catch (err) {
         console.log(err)
-        return res.redirect('/404')
+        return res.redirect('/')
     }
 
-
+    return res.redirect('/')
 })
 router.get('/register', (req, res) => {
     res.render('auth/register')
