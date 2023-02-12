@@ -14,7 +14,9 @@ const userSchema = new mongoose.Schema({
         minLength: [6, 'Possword is too short']
 
     }
-})
+});
+
+
 
 userSchema.pre('save', function (next) {
     bcrypt.hash(this.password, 10)
@@ -25,6 +27,13 @@ userSchema.pre('save', function (next) {
 
 });
 
+userSchema.method('validatePassword',function (password) {
+
+   return  bcrypt.compare(password, this.password);
+
+    
+
+})
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;

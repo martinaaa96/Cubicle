@@ -5,6 +5,21 @@ const authService = require('../services/authService')
 router.get('/login', (req, res) => {
     res.render('auth/login')
 })
+
+router.post('/login', async (req, res) => {
+
+    const { username, password } = req.body;
+    try {
+        const user = await authService.login(username, password)
+
+        res.redirect('/');
+    } catch (err) {
+        console.log(err)
+        return res.redirect('/404')
+    }
+
+
+})
 router.get('/register', (req, res) => {
     res.render('auth/register')
 })
@@ -17,16 +32,16 @@ router.post('/register', async (req, res) => {
 
     }
 
-const existingUser = await authService.getUserByUserName(username);
+    const existingUser = await authService.getUserByUserName(username);
 
-if(existingUser){
+    if (existingUser) {
 
-    return res.redirect('/404')
-}
-const user = await authService.register(username,password);
-console.log(user)
+        return res.redirect('/404')
+    }
+    const user = await authService.register(username, password);
+    console.log(user)
 
-res.redirect('/login');
+    res.redirect('/login');
 
 });
 
