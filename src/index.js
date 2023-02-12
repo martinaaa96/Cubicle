@@ -4,7 +4,7 @@ const routes = require('./routs');
 const config = require('./config');
 const setUpViewEngine = require('./config/viewEngine');
 const initDatabase = require('./config/dbInit');
-
+const authMiddleware = require('./middlewares/authMiddleware')
 
 
 const app = express();
@@ -13,8 +13,11 @@ setUpViewEngine(app);
 
 
 app.use(express.static('src/public'))
-app.use(cookieParser)
+app.use(cookieParser());
+
 app.use(express.urlencoded({ extended: false }));
+app.use(authMiddleware.authentication);
+
 app.use(routes)
 
 initDatabase()
