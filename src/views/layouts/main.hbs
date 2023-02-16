@@ -28,10 +28,11 @@
 
       </ul>
     </header>
-
+{{#if error}}
 <div id="notifications">
-  <p id="notification-message">Some Error Message</p>
+  <p id="notification-message">{{error}}</p>
 </div>
+{{/if}}
     {{{body}}}
   </div>
   <footer>@Cubicle: Exercise for Express.js and Handlebars</footer>

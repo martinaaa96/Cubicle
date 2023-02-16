@@ -12,7 +12,7 @@ exports.login = async (username, password) => {
 
   const user = await this.getUserByUserName(username)
 
-  const isValid = await user.validatePassword(password);
+ 
 
   if (!user) {
     throw new AppError('Invalid username', { user })
@@ -23,7 +23,8 @@ exports.login = async (username, password) => {
     //data: user 
     // }
   }
-  if (!user || !isValid) {
+  const isValid = await user.validatePassword(password);
+  if (!isValid) {
     throw new AppError('Invalid password');
     //throw {
       //message: 'Invalid  password'

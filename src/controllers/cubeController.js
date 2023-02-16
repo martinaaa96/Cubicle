@@ -63,12 +63,14 @@ exports.postAttachAccessory = async (req, res) => {
 
 };
 
-exports.getEditCube = async (req, res) => {
+exports.getEditCube = async (req, res ) => {
     const cube = await cubeService.getOne(req.params.cubeId).lean();
     const difficultyLevels = cubeUtils.generateDifficultyLevels(cube.difficultyLevel);
 
     if (!cubeUtils.isOwner(req.user, cube)) {
-        return res.redirect('/404');
+    throw new Error('You are not an owner!');
+ 
+
     }
     
     res.render('cube/edit', { cube, difficultyLevels });
